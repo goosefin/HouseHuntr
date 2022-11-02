@@ -28,9 +28,10 @@ CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(apartments,url_prefix='/api/v1/apartments/')
 app.register_blueprint(user,url_prefix='/api/v1/user/')
 
-@app.route('/sample')
-def get_sample():
-    return ['hello','hi']
+# test route
+# @app.route('/sample')
+# def get_sample():
+#     return ['hello','hi']
 
 if __name__ == '__main__':
     models.initialize()
