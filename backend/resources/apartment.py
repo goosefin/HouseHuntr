@@ -8,8 +8,9 @@ apartments = Blueprint('apartments','apartments')
 
 # INDEX ROUTE
 @apartments.route('/', methods=['GET'])
+@login_required
 def apartments_index():
-    apartment_dicts = [model_to_dict(apartment) for apartment in models.Apartment.select()]
+    apartment_dicts = [model_to_dict(apartment) for apartment in current_user.apartments]
     return jsonify({
         'data':apartment_dicts,
         'message': f'Successfully found {len(apartment_dicts)} apartments',
@@ -18,9 +19,10 @@ def apartments_index():
 
 # CREATE ROUTE
 @apartments.route('/', methods=['POST'])
+@login_required
 def create_apartment():
     payload = request.get_json()
-    new_apartment = models.Apartment.create(address=payload['address'],bedrooms=payload['bedrooms'],price=payload['price'],pets=payload['price'],amenities=payload['amenities'],link=payload['link'],scheduled_showing=payload['scheduled_showing'],scheduled_showing_time=payload['scheduled_showing_time'],seen=payload['seen'],applied=payload['applied'],user=payload['user'])
+    new_apartment = models.Apartment.create(address=payload['address'],bedrooms=payload['bedrooms'],price=payload['price'],pets=payload['price'],amenities=payload['amenities'],link=payload['link'],scheduled_showing=payload['scheduled_showing'],scheduled_showing_time=payload['scheduled_showing_time'],seen=payload['seen'],applied=payload['applied'],user=current_user.id)
     apartment_dict = model_to_dict(new_apartment)
     return jsonify(
         data = apartment_dict,
@@ -30,6 +32,7 @@ def create_apartment():
 
 # SHOW DELETE AND UPDATE
 @apartments.route('/<id>',methods=['GET','PUT','DELETE'])
+@login_required
 def handle_one_apartment(id):
     if request.method == 'GET':
         apartment = models.Apartment.get_by_id(id)
