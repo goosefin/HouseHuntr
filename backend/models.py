@@ -14,11 +14,11 @@ class User(UserMixin,Model):
         database = DATABASE
 
 class Apartment(Model):
-    # address = CharField() not NULL
+    address = CharField(null=False)
     bedrooms = IntegerField()
     price = IntegerField()
     pets = BooleanField()
-    # amenities = Array()
+    amenities = CharField()
     link = CharField()
     scheduled_showing = BooleanField()
     scheduled_showing_time = CharField()
