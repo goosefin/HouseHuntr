@@ -35,7 +35,7 @@ def register():
             data = user_dict,
             status = {
                 'code':201,
-                'message':'Success'
+                'message':'Successfully registered'
             }
         ),201
 
@@ -53,7 +53,7 @@ def login():
                 data = user_dict,
                 status = {
                     'code':200,
-                    'message':'Success'
+                    'message':'Successfully logged in'
                 }
             ),200
         else:
