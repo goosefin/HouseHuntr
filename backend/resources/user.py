@@ -43,12 +43,16 @@ def register():
 @user.route('/login', methods=['POST'])
 def login():
     payload = request.get_json()
+    print(payload)
     try:
+        print(payload['email'])
         user = models.User.get(models.User.email == payload['email'])
+        print(user, 'user')
         user_dict = model_to_dict(user)
         if(check_password_hash(user_dict['password'], payload['password'])):
             del user_dict['password']
             login_user(user)
+            print(user_dict)
             return jsonify(
                 data = user_dict,
                 status = {
