@@ -22,7 +22,9 @@ def apartments_index():
 @login_required
 def create_apartment():
     payload = request.get_json()
-    new_apartment = models.Apartment.create(address=payload['address'],bedrooms=payload['bedrooms'],price=payload['price'],pets=payload['price'],amenities=payload['amenities'],link=payload['link'],scheduled_showing=payload['scheduled_showing'],scheduled_showing_time=payload['scheduled_showing_time'],seen=payload['seen'],applied=payload['applied'],user=current_user.id)
+    # if statements for checkboxes
+    print(payload)
+    new_apartment = models.Apartment.create(address=payload['address'],bedrooms=payload['bedrooms'],price=payload['price'],pets=payload['price'],cats=payload['cats'],dogs=payload['dogs'],washer=payload['washer'],dryer=payload['dryer'],dishwasher=payload['dishwasher'],outdoor_space=payload['outdoor_space'],elevator=payload['elevator'],doorman=payload['doorman'],link=payload['link'],scheduled_showing=payload['scheduled_showing'],scheduled_showing_time=payload['scheduled_showing_time'],seen=payload['seen'],applied=payload['applied'],user=current_user.id)
     apartment_dict = model_to_dict(new_apartment)
     return jsonify(
         data = apartment_dict,

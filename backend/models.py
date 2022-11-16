@@ -25,7 +25,7 @@ class Apartment(Model):
     dishwasher = BooleanField()
     outdoor_space = BooleanField()
     elevator = BooleanField()
-    doormans = BooleanField()
+    doorman = BooleanField()
     link = CharField()
     scheduled_showing = BooleanField()
     scheduled_showing_time = CharField()
