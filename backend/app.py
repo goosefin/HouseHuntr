@@ -22,8 +22,11 @@ def load_user(user_id):
     except models.DoesNotExist:
         return None
 
-CORS(apartments, origins=['http://localhost:3000'], supports_credentials=True)
-CORS(user, origins=['http://localhost:3000'], supports_credentials=True)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
+CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(apartments, origins=['*'], supports_credentials=True)
+CORS(user, origins=['*'], supports_credentials=True)
 
 app.register_blueprint(apartments,url_prefix='/api/v1/apartments')
 app.register_blueprint(user,url_prefix='/api/v1/user')
