@@ -4,13 +4,18 @@ from resources.user import user
 import models
 from flask_cors import CORS
 from flask_login import LoginManager
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 DEBUG = True
-PORT = 8000
+PORT = os.environ.get("PORT")
 
 app = Flask(__name__)
 
-app.secret_key = 'ABCD'
+app.secret_key = os.environ.get("SECRET_KEY")
 
 login_manager = LoginManager()
 login_manager.init_app(app)
