@@ -33,6 +33,7 @@ class Apartment(Model):
     scheduled_showing_time = CharField()
     seen = BooleanField(default=False)
     applied = BooleanField(default=False)
+    approved = BooleanField(default=False)
     user = ForeignKeyField(User, backref='apartments')
 
     class Meta:
